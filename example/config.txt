@@ -1,0 +1,2 @@
+Prefix plugins/Ensemble/example
+Plugin Ensemble inputfile fake_data.txt outputfile fake_data.ensemble.csv
