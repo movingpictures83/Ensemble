@@ -10,6 +10,9 @@ import warnings
 import numpy as np
 from numpy import (unravel_index, argmax, ones, corrcoef, cov, r_, 
                    diag, sqrt, where, nan)
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 from core_methods import to_fractions
 from compositional_methods import variation_mat, clr    
 from analysis_methods import correlation
@@ -201,7 +204,7 @@ def basis_corr(f, method='sparcc', **kwargs):
     k = f.shape[1]
     ## compute basis variances & correlations
     if k<4: 
-        raise ValueError, 'Can not detect correlations between compositions of <4 components (%d given)' %k     
+        raise ValueError
     if method == 'clr':
         V_base, C_base, Cov_base = run_clr(f)
     elif method == 'sparcc':
@@ -216,8 +219,7 @@ def basis_corr(f, method='sparcc', **kwargs):
             warnings.warn('Sparcity assumption violated. Returning clr result.')
             V_base, C_base, Cov_base = run_clr(f)    
     else:
-        raise ValueError, 'Unsupported basis correlation method: "%s"' %method
-    print "Returning, done computing correlations."
+        raise ValueError
     return V_base, C_base, Cov_base 
 
 def main(counts, method='sparcc', **kwargs):
@@ -275,7 +277,7 @@ def main(counts, method='sparcc', **kwargs):
     th       = kwargs.setdefault('th',0.1)   # exclusion threshold for iterative sparse algo
     if method in ['sparcc', 'clr']: 
         for i in range(n_iter):
-            if oprint: print '\tRunning iteration' + str(i)
+            if oprint: print('\tRunning iteration' + str(i))
             #fracs = to_fractions(counts, method=norm)
             fracs = counts
             # PUT TO LOW VALUES?
@@ -302,10 +304,10 @@ def main(counts, method='sparcc', **kwargs):
         cov_med = cor_med * x**0.5 * y**0.5
         pval = None
     elif method in ['pearson', 'kendall', 'spearman']:
-	n = counts.shape[1]
-	cor_array = np.zeros((n_iter, n, n))
+        n = counts.shape[1]
+        cor_array = np.zeros((n_iter, n, n))
         for i in range(n_iter):
-            if oprint: print '\tRunning iteration ' + str(i)
+            if oprint: print('\tRunning iteration ' + str(i))
             fracs = counts
             # Attempting this scaling in Pearson/Spearman as well
             #for col in fracs.keys():

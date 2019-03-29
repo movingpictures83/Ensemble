@@ -54,13 +54,13 @@ def get_pvalues(cor, perm_template, nperm, test_type='two_sided',
     elif test_type == 'one_sided':
         cmpfun = compare1sided
     else:
-        raise ValueError, 'unsupported test type "%s"' %test_type
+        raise ValueError
     n_sig = DF(np.zeros(cor.shape), 
                index=cor.index,
                columns=cor.columns)
-    for i in xrange(nperm):
+    for i in range(nperm):
         if iprint>0:
-            if not i%iprint: print i 
+            if not i%iprint: print(i)
         permfile = perm_template.replace('#', '%d'%i)
         cor_perm = read_txt(permfile).values
         n_sig[cmpfun(cor_perm, cor)] += 1  

@@ -42,9 +42,9 @@ def make_bootstraps(counts, nperm, perm_template, outpath='./', iprint=0):
         If iprint<=0 no printouts are made.
     '''
     if not os.path.exists(outpath): os.makedirs(outpath)
-    for i in xrange(nperm):
+    for i in range(nperm):
         if iprint>0:
-            if not i%iprint: print i
+            if not i%iprint: print(i)
         counts_perm = permute_w_replacement(counts) 
         ## write out cors
         outfile = outpath + perm_template.replace('#', '%d'%i)

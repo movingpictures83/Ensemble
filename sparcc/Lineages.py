@@ -4,7 +4,8 @@ Created on Jun 27, 2011
 @author: jonathanfriedman
 '''
 
-import cPickle as pickle
+import pickle
+#import cPickle as pickle
 import numpy as np
 
 _levels         = ['k', 'p', 'c', 'o', 'f', 'g' , 's']

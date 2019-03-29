@@ -109,8 +109,8 @@ def correlation(frame, method='pearson', axis=0):
         n = len(row_labels)
         c_mat = np.zeros((n, n))
         p_mat = np.zeros((n, n))
-        for i in xrange(n):
-            for j in xrange(i, n):
+        for i in range(n):
+            for j in range(i, n):
                 if i == j: 
                     c_mat[i][i] = 1
                     p_mat[i][i] = 1

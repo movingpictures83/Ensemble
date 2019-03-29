@@ -81,7 +81,10 @@ def variation_mat(frame):
     Return the variation matrix of frame.
     Element i,j is the variance of the log ratio of components i and j.
     '''
-    x    = 1.*asarray(frame)
+    #print(frame)
+    #print(type(asarray(frame)))
+    x = 1.*asarray(frame)
+    #x    = 1.*asarray(frame)
     n,m  = x.shape
     if m > 1000:
         return variation_mat_slow(frame)
@@ -90,11 +93,27 @@ def variation_mat(frame):
         xx_t = xx.transpose(0,2,1)
         #print "XX DIM: ", len(xx), " BY ", len(xx[0])
         #print "XX_T DIM: ", len(xx_t), " BY ", len(xx_t[0])
-        #print "XX: ", xx
-        #print "XX_T: ", xx_t
+        #print("XX: "+xx)
+        #print("XX_T: "+xx_t)
         try:
-            #print type(xx), type(4), type(xx[0][0][0])
-            l    = log(1.*xx/xx_t)
+            #print(str(type(xx))+str(type(4))+str(type(xx[0][0][0])))
+            #print(type(xx))
+            #input()
+            #print(type(xx_t))
+            #input()
+            #print(dir(xx))
+            #input()
+            #print(xx)
+            #input()
+            #print(xx_t)
+            #input()
+            #print(xx/xx_t)
+            #for i in range(len(xx)):
+            #   print(xx[i])
+            ##print(xx)
+            #print(type(xx[0][0][0]))
+            #print(xx.astype(float))#/xx_t)
+            l    = log(np.divide(xx, xx_t))#xx/xx_t)
             V    = l.var(axis=0, ddof=1)
             return V
         except MemoryError:
@@ -106,7 +125,7 @@ def variation_mat_slow(frame, shrink=False):
     Element i,j is the variance of the log ratio of components i and j.
     Slower version to be used in case the fast version runs out of memeory.
     '''
-    print 'in slow'
+    print('in slow')
     frame_a = 1.*asarray(frame)
     k    = frame_a.shape[1]
     V      = zeros((k,k))

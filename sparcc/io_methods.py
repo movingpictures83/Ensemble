@@ -92,10 +92,10 @@ def read_txt(file, T=True, lin=None, lin_label='lineage',
         
     table = temp
     if lin:
-        if verbose: print '\n'.join(s), '\n'
+        if verbose: print('\n'.join(s)+'\n')
         return table, lins
     else:
-        if verbose: print '\n'.join(s), '\n'
+        if verbose: print('\n'.join(s)+'\n')
         return table
 
 def write_txt(frame, file, T=True, lin=None, lin_label='lineage', **kwargs):
