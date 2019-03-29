@@ -2,7 +2,7 @@
 # Language: Python
 # Input: CSV (file of samples and counts)
 # Output: CSV (correlations)
-# Tested with: PluMA 1.0, Python 2.7
+# Tested with: PluMA 1.0, Python 3.6
 
 PluMA plugin that computes correlations using an ensemble (Weiss et al, 2016) approach
 involving Pearson, Spearman and SparCC (Freidman, 2012) correlations.
