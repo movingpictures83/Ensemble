@@ -1,14 +1,15 @@
 # Ensemble
 # Language: Python
-# Input: CSV (file of samples and counts)
+# Input: TXT
 # Output: CSV (correlations)
 # Tested with: PluMA 1.0, Python 3.6
+# Dependency: sparcc, numpy==1.16.0
 
 PluMA plugin that computes correlations using an ensemble (Weiss et al, 2016) approach
 involving Pearson, Spearman and SparCC (Freidman, 2012) correlations.
 
-The plugin accepts as input a CSV file of counts with rows representing samples.
-Entry (i, j) corresponds to the abundance of variable j in sample i.  The output CSV
+The plugin accepts as input a TXT file of counts with columns representing samples.
+Entry (i, j) corresponds to the abundance of variable i in sample j.  The output CSV
 file will contain correlations computed using the ensemble approach, with entry
 (i, j) representing the computed correlation between variable i and variable j.
 
