@@ -90,10 +90,10 @@ def run_sparcc(f, **kwargs):
     ## get approx. basis variances and from them basis covariances/correlations 
     
     #print "**********************************************"
-    #print "PARAMETERS FOR BASIS VAR"
-    #print "F: ", f
-    #print "VAR MAT TMP: ", Var_mat_temp
-    #print "M: ", M
+    #print ("PARAMETERS FOR BASIS VAR")
+    #print ("F: ", f)
+    #print ("VAR MAT TMP: ", Var_mat_temp)
+    #print ("M: ", M)
     #print "**********************************************"
     V_base = basis_var(f, Var_mat_temp, M)
     C_base, Cov_base = C_from_V(Var_mat, V_base)
@@ -101,10 +101,10 @@ def run_sparcc(f, **kwargs):
     excluded_pairs = []
     excluded_comp  = np.array([])
     ##print "**********************************************"
-    #print "BEFORE LOOP"
-    #print "VBASE: ", V_base
-    #print "CBASE: ", C_base
-    #print "COV BASE: ", Cov_base
+    #print("BEFORE LOOP")
+    #print("VBASE: ", V_base)
+    #print("CBASE: ", C_base)
+    #print("COV BASE: ", Cov_base)
     #print "**********************************************"
     for xi in range(xiter):
         #print "IN LOOP ", xi
@@ -145,7 +145,7 @@ def run_sparcc(f, **kwargs):
         V_base = basis_var(f, Var_mat_temp, M)
         C_base, Cov_base = C_from_V(Var_mat, V_base)
         # set excluded components infered values to nans
-        #print "EXCLUDED COMPONENTS: ", excluded_comp
+        #print ("EXCLUDED COMPONENTS: ", excluded_comp)
         for xcomp in excluded_comp:
             #print "EXCLUDED PAIR: ", xcomp
             V_base[xcomp] = nan
@@ -211,9 +211,9 @@ def basis_corr(f, method='sparcc', **kwargs):
         #print "DOING SPARCC"
         V_base, C_base, Cov_base = run_sparcc(f, **kwargs)
         #print "RESULTS"
-        #print "VBASE: ", V_base
-        #print "CBASE: ", C_base
-        #print "COVBASE: ", Cov_base
+        #printt("VBASE: ", V_base)
+        #print("CBASE: ", C_base)
+        #print("COVBASE: ", Cov_base)
         tol = 1e-3 # tolerance for correlation range
         if np.max(np.abs(C_base)) > 1 + tol:
             warnings.warn('Sparcity assumption violated. Returning clr result.')
@@ -272,7 +272,7 @@ def main(counts, method='sparcc', **kwargs):
     var_list = []  # list of cov matrices from different random fractions
     oprint   = kwargs.pop('oprint',True)
     n_iter     = kwargs.pop('iter',20)  # number of iterations 
-    norm     = kwargs.pop('norm','dirichlet')
+    norm     = kwargs.pop('norm','normalize')#'dirichlet')
     log      = kwargs.pop('log','True')
     th       = kwargs.setdefault('th',0.1)   # exclusion threshold for iterative sparse algo
     if method in ['sparcc', 'clr']: 
@@ -377,17 +377,17 @@ def driver():
     if cov_file is None: cov_file =  'cov_mat_' + algo + '.out' 
     if pval_file is None: pval_file = 'pval_mat_' + algo + '.out' 
        
-    #print 'reading data'
+    print('reading data')
     counts = read_txt(counts_file)
      
     ## Calculate correlations between components using SparCC
-    #print 'computing correlations'
+    print('computing correlations')
     cor, cov, pval = basis_corr(counts, method=algo, **kwargs)
-     
+    print(counts)
     ## write out results
-    #print 'writing results'
+    print('writing results')
     write_txt(cor, cor_file)
-    #print 'wrote ' + cor_file
+    print('wrote ' + cor_file)
     if cov is not None:
         write_txt(cov, cov_file)
         #print 'wrote ' + cov_file

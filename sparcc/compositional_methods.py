@@ -105,6 +105,7 @@ def variation_mat(frame):
             #input()
             #print(xx)
             #input()
+            #print("XX_T")
             #print(xx_t)
             #input()
             #print(xx/xx_t)
